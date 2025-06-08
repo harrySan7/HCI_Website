@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Open API QRIS - InterActive QRIS</title>
+    <link href="/CSS/API/api.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <a href="/HTML/Home Page/index.html">
+                <img src="/Images/Home Page/logo.png" alt="InterActive QRIS Logo">
+            </a>
+        </div>
+
+        <div class="header-dir">
+            <a href="/HTML/Home Page/index.html">BERANDA</a>
+            <a href="#">TENTANG QRIS</a>
+            <a href="#">LAINNYA</a>
+            <a href="/HTML/Sign In Page/sign-in.html">MASUK</a>
+            <a href="/HTML/Sign Up Page/sign.html">BUAT AKUN</a>
+            <div class="lang">
+                <img src="/Images/Home Page/indo.png" alt="Indonesian Flag">
+                <a href="/HTML/API/API-eng.html">ID</a>
+            </div>
+            <div id="userNameDisplay"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>Berkembang di Era Digital Bersama QRIS</h1>
+            <p class="subtitle">Integrasikan sistem pembayaran Anda dengan QRIS Open API Platform. Satu QR Code untuk semua E-Wallet yang merupakan standar QR Code dari Bank Indonesia.</p>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Sistem Terintegrasi</h3>
+                <p>Open API Platform QRIS membantu software Anda support semua pembayaran E-Wallet sehingga memudahkan transaksi dengan QR Code dinamis.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>Semua E-Wallet</h3>
+                <p>Terima pembayaran dari GoPay, OVO, DANA, ShopeePay, LinkAja dan semua E-Wallet yang mendukung QRIS dengan satu QR Code.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Keamanan Terjamin</h3>
+                <p>Transaksi lebih aman dengan riwayat tercatat otomatis, mempercepat proses pembayaran tanpa perlu sedia uang kembalian.</p>
+            </div>
+        </section>
+
+        <!-- API Documentation -->
+        <section class="api-docs">
+            <h2><i class="fas fa-book" style="margin-right: 15px;"></i>Dokumentasi API</h2>
+            
+            <div class="api-endpoint">
+                <h3>
+                    <span class="api-method">GET</span>
+                    Generate Invoice QRIS
+                </h3>
+                <p>API untuk menampilkan nominal transaksi QRIS dan mendapatkan QR Code dinamis.</p>
+                <div class="api-url">
+                    https://qris.interactive.co.id/restapi/qris/show_qris.php
+                </div>
+
+                <table class="params-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>do</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>Harus bernilai "create-invoice"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>apikey</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>APIKEY dari email aktivasi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>mID</strong></td>
+                            <td>integer</td>
+                            <td>✓</td>
+                            <td>Merchant ID dari email aktivasi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>cliTrxNumber</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>Nomor transaksi dari aplikasi Anda</td>
+                        </tr>
+                        <tr>
+                            <td><strong>cliTrxAmount</strong></td>
+                            <td>integer</td>
+                            <td>✓</td>
+                            <td>Nominal transaksi dalam Rupiah</td>
+                        </tr>
+                        <tr>
+                            <td><strong>useTip</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>"yes" untuk menggunakan tip, "no" untuk tidak</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">Contoh Request:</h4>
+                <div class="code-example">
+// PHP Example
+$apikey = "a789789";
+$mID = 123456;
+$cliTrxNumber = "PJ0099";
+$cliTrxAmount = 10000;
+$useTip = "no";
+
+$url = "https://qris.interactive.co.id/restapi/qris/show_qris.php?do=create-invoice&apikey=".$apikey."&mID=".$mID."&cliTrxNumber=".$cliTrxNumber."&cliTrxAmount=".$cliTrxAmount."&useTip=".$useTip;
+
+$response = file_get_contents($url);
+$data = json_decode($response, true);
+
+if($data['status'] == 'success') {
+    $qris_content = $data['data']['qris_content'];
+    $qris_invoiceid = $data['data']['qris_invoiceid'];
+    $qris_request_date = $data['data']['qris_request_date'];
+    $qris_nmid = $data['data']['qris_nmid'];
+    
+    // Generate QR Code menggunakan library (contoh: qrcode.js)
+    echo "<div id='qrcode'></div>";
+    echo "<script>QRCode.toCanvas(document.getElementById('qrcode'), '".$qris_content."');</script>";
+}
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">JavaScript Example:</h4>
+                <div class="code-example">
+// JavaScript/AJAX Example
+const generateQRIS = async () => {
+    const params = {
+        do: 'create-invoice',
+        apikey: 'a789789',
+        mID: 123456,
+        cliTrxNumber: 'PJ0099',
+        cliTrxAmount: 10000,
+        useTip: 'no'
+    };
+    
+    const url = new URL('https://qris.interactive.co.id/restapi/qris/show_qris.php');
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if(data.status === 'success') {
+            // Generate QR Code
+            const qr = new QRCode(document.getElementById("qrcode"), {
+                text: data.data.qris_content,
+                width: 256,
+                height: 256
+            });
+            
+            // Store invoice data untuk check status nanti
+            localStorage.setItem('invoiceId', data.data.qris_invoiceid);
+            localStorage.setItem('trxAmount', params.cliTrxAmount);
+            localStorage.setItem('trxDate', new Date().toISOString().split('T')[0]);
+        }
+    } catch (error) {
+        console.error('Error generating QRIS:', error);
+    }
+};
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">Success Response:</h4>
+                <div class="code-example">
+{
+    "status": "success",
+    "data": {
+        "qris_content": "00020101021226680016ID.CO.PJSP.WWW011893600898025599662702150001952559966270303UMI51440014ID.CO.QRIS.WWW0215ID10200211817450303UMI520457325303360540825578.005502015802ID5916InterActive Corp6013KOTA SURABAYA61056013662130509413255111630439B7",
+        "qris_request_date": "2024-12-07 11:13:42",
+        "qris_invoiceid": "413255111",
+        "qris_nmid": "ID1020021181745"
+    }
+}
+                </div>
+
+                <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                    <h4 style="color: #856404; margin-bottom: 10px;"><i class="fas fa-exclamation-triangle"></i> Penting!</h4>
+                    <p style="color: #856404; margin: 0;">QRIS kadaluarsa dalam 30 menit. Simpan qris_content, qris_request_date, dan qris_invoiceid ke database untuk keperluan verifikasi pembayaran.</p>
+                </div>
+            </div>
+
+            <div class="api-endpoint">
+                <h3>
+                    <span class="api-method">GET</span>
+                    Check Payment Status
+                </h3>
+                <p>API untuk memeriksa status pembayaran QRIS yang telah di-scan oleh pengguna.</p>
+                <div class="api-url">
+                    https://qris.interactive.co.id/restapi/qris/checkpaid_qris.php
+                </div>
+
+                <table class="params-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>do</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>Harus bernilai "checkStatus"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>apikey</strong></td>
+                            <td>string</td>
+                            <td>✓</td>
+                            <td>APIKEY dari email aktivasi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>mID</strong></td>
+                            <td>integer</td>
+                            <td>✓</td>
+                            <td>Merchant ID dari email aktivasi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>invid</strong></td>
+                            <td>integer</td>
+                            <td>✓</td>
+                            <td>Invoice ID dari response Create Invoice</td>
+                        </tr>
+                        <tr>
+                            <td><strong>trxvalue</strong></td>
+                            <td>integer</td>
+                            <td>✓</td>
+                            <td>Nominal transaksi dalam Rupiah</td>
+                        </tr>
+                        <tr>
+                            <td><strong>trxdate</strong></td>
+                            <td>date</td>
+                            <td>✓</td>
+                            <td>Tanggal pembayaran (YYYY-mm-dd)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">PHP Implementation:</h4>
+                <div class="code-example">
+// PHP Check Payment Status
+function checkPaymentStatus($apikey, $mID, $invoiceId, $trxValue, $trxDate) {
+    $url = "https://qris.interactive.co.id/restapi/qris/checkpaid_qris.php";
+    $params = [
+        'do' => 'checkStatus',
+        'apikey' => $apikey,
+        'mID' => $mID,
+        'invid' => $invoiceId,
+        'trxvalue' => $trxValue,
+        'trxdate' => $trxDate
+    ];
+    
+    $url .= '?' . http_build_query($params);
+    
+    // Set timeout 15 detik
+    $context = stream_context_create([
+        'http' => [
+            'timeout' => 15
+        ]
+    ]);
+    
+    $response = file_get_contents($url, false, $context);
+    $data = json_decode($response, true);
+    
+    return $data;
+}
+
+// Usage example
+$result = checkPaymentStatus("a789789", 123456, 413255111, 10000, "2024-12-07");
+
+if($result['status'] == 'success' && $result['data']['qris_status'] == 'paid') {
+    echo "Pembayaran berhasil!";
+    echo "Nama Customer: " . $result['data']['qris_payment_customername'];
+    echo "Metode Pembayaran: " . $result['data']['qris_payment_methodby'];
+    
+    // Update status di database Anda
+    updateOrderStatus($invoiceId, 'paid');
+} else {
+    echo "Pembayaran belum berhasil atau masih pending";
+}
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">JavaScript Implementation dengan Retry Logic:</h4>
+                <div class="code-example">
+// JavaScript Check Payment dengan retry mechanism
+const checkPaymentStatus = async (invoiceId, trxAmount, trxDate, maxRetries = 3) => {
+    const params = {
+        do: 'checkStatus',
+        apikey: 'a789789',
+        mID: 123456,
+        invid: invoiceId,
+        trxvalue: trxAmount,
+        trxdate: trxDate
+    };
+    
+    for(let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const url = new URL('https://qris.interactive.co.id/restapi/qris/checkpaid_qris.php');
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+            
+            const response = await fetch(url, {
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            
+            const data = await response.json();
+            
+            if(data.status === 'success' && data.data.qris_status === 'paid') {
+                // Payment successful
+                showPaymentSuccess(data.data);
+                return data;
+            } else if(attempt === maxRetries) {
+                // Show manual verification option after max retries
+                showManualVerificationOption();
+            }
+            
+        } catch (error) {
+            console.error(`Attempt ${attempt} failed:`, error);
+            if(attempt === maxRetries) {
+                showManualVerificationOption();
+            }
+        }
+        
+        // Wait before next attempt
+        if(attempt < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, 15000));
+        }
+    }
+};
+
+const showPaymentSuccess = (paymentData) => {
+    document.getElementById('payment-status').innerHTML = `
+        <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <h3>Pembayaran Berhasil!</h3>
+            <p>Nama: ${paymentData.qris_payment_customername}</p>
+            <p>Metode: ${paymentData.qris_payment_methodby}</p>
+        </div>
+    `;
+};
+
+const showManualVerificationOption = () => {
+    document.getElementById('payment-status').innerHTML = `
+        <div class="manual-verification">
+            <p>Belum menerima konfirmasi pembayaran otomatis.</p>
+            <button onclick="uploadPaymentProof()">Upload Bukti Pembayaran</button>
+            <button onclick="contactSupport()">Hubungi Customer Service</button>
+        </div>
+    `;
+};
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">Success Response:</h4>
+                <div class="code-example">
+{
+    "status": "success",
+    "data": {
+        "qris_status": "paid",
+        "qris_payment_customername": "EDWIN PERDANA",
+        "qris_payment_methodby": "BCA"
+    },
+    "qris_api_version_code": "2505011709"
+}
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">Failed Response:</h4>
+                <div class="code-example">
+{
+    "status": "failed",
+    "data": {
+        "qris_status": "unpaid"
+    }
+}
+                </div>
+
+                <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                    <h4 style="color: #721c24; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Catatan Penting</h4>
+                    <ul style="color: #721c24; margin: 0; padding-left: 20px;">
+                        <li>Jangan melakukan auto check status secara terus menerus</li>
+                        <li>Gunakan timeout 15 detik dengan maksimal 3 kali retry</li>
+                        <li>Atau gunakan CronJob 1 menit sekali maksimal 30 kali</li>
+                        <li>Sediakan opsi upload bukti pembayaran manual</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="api-endpoint">
+                <h3>
+                    <i class="fas fa-cogs" style="margin-right: 10px;"></i>
+                    Complete Integration Example
+                </h3>
+                <p>Contoh implementasi lengkap untuk sistem POS atau e-commerce.</p>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">HTML Frontend:</h4>
+                <div class="code-example">
+&lt;!-- Payment Interface --&gt;
+&lt;div id="payment-container"&gt;
+    &lt;div class="payment-info"&gt;
+        &lt;h3&gt;Total Pembayaran: Rp &lt;span id="total-amount"&gt;25,000&lt;/span&gt;&lt;/h3&gt;
+        &lt;button id="generate-qris" onclick="generatePayment()"&gt;Generate QRIS&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div id="qris-display" style="display: none;"&gt;
+        &lt;div id="qrcode"&gt;&lt;/div&gt;
+        &lt;p&gt;NMID: &lt;span id="nmid-display"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;p&gt;Berlaku hingga: &lt;span id="expiry-time"&gt;&lt;/span&gt;&lt;/p&gt;
+        &lt;button id="check-payment" onclick="checkPayment()"&gt;Cek Status Pembayaran&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div id="payment-status"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"&gt;&lt;/script&gt;
+                </div>
+
+                <h4 style="margin-top: 25px; color: var(--primary-color);">Complete JavaScript Implementation:</h4>
+                <div class="code-example">
+class QRISPayment {
+    constructor(apikey, mID) {
+        this.apikey = apikey;
+        this.mID = mID;
+        this.baseUrl = 'https://qris.interactive.co.id/restapi/qris/';
+        this.currentInvoice = null;
+    }
+    
+    async generateQRIS(amount, transactionNumber) {
+        const params = {
+            do: 'create-invoice',
+            apikey: this.apikey,
+            mID: this.mID,
+            cliTrxNumber: transactionNumber,
+            cliTrxAmount: amount,
+            useTip: 'no'
+        };
+        
+        try {
+            const url = new URL(this.baseUrl + 'show_qris.php');
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if(data.status === 'success') {
+                this.currentInvoice = {
+                    id: data.data.qris_invoiceid,
+                    amount: amount,
+                    date: new Date().toISOString().split('T')[0],
+                    content: data.data.qris_content,
+                    nmid: data.data.qris_nmid,
+                    requestDate: data.data.qris_request_date
+                };
+                
+                this.displayQRIS(data.data);
+                this.startExpiryTimer(data.data.qris_request_date);
+                
+                return data;
+            } else {
+                throw new Error(data.data.qris_status || 'Failed to generate QRIS');
+            }
+        } catch (error) {
+            console.error('Error generating QRIS:', error);
+            throw error;
+        }
+    }
+    
+    displayQRIS(qrisData) {
+        // Clear previous QR code
+        document.getElementById('qrcode').innerHTML = '';
+        
+        // Generate new QR code
+        QRCode.toCanvas(document.getElementById('qrcode'), qrisData.qris_content, {
+            width: 256,
+            margin: 2
+        });
+        
+        // Display NMID
+        document.getElementById('nmid-display').textContent = qrisData.qris_nmid;
+        
+        // Show QRIS container
+        document.getElementById('qris-display').style.display = 'block';
+    }
+    
+    startExpiryTimer(requestDate) {
+        const expiryTime = new Date(requestDate);
+        expiryTime.setMinutes(expiryTime.getMinutes() + 30);
+        
+        const updateTimer = () => {
+            const now = new Date();
+            const timeLeft = expiryTime - now;
+            
+            if(timeLeft <= 0) {
+                document.getElementById('expiry-time').textContent = 'EXPIRED';
+                document.getElementById('expiry-time').style.color = 'red';
+                clearInterval(timerInterval);
+            } else {
+                const minutes = Math.floor(timeLeft / 60000);
+                const seconds = Math.floor((timeLeft % 60000) / 1000);
+                document.getElementById('expiry-time').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        };
+        
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    async checkPaymentStatus() {
+        if(!this.currentInvoice) {
+            throw new Error('No active invoice to check');
+        }
+        
+        const params = {
+            do: 'checkStatus',
+            apikey: this.apikey,
+            mID: this.mID,
+            invid: this.currentInvoice.id,
+            trxvalue: this.currentInvoice.amount,
+            trxdate: this.currentInvoice.date
+        };
+        
+        try {
+            const url = new URL(this.baseUrl + 'checkpaid_qris.php');
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            const data = await response.json();
+            return data;
+            
+        } catch (error) {
+            console.error('Error checking payment status:', error);
+            throw error;
+        }
+    }
+}
+
+// Usage
+const qrisPayment = new QRISPayment('your-api-key', 123456);
+
+const generatePayment = async () => {
+    try {
+        const amount = 25000;
+        const trxNumber = 'TRX' + Date.now();
+        
+        document.getElementById('payment-status').innerHTML = 'Generating QRIS...';
+        
+        await qrisPayment.generateQRIS(amount, trxNumber);
+        
+        document.getElementById('payment-status').innerHTML = 
+            '&lt;p style="color: green;"&gt;QRIS berhasil dibuat. Silakan scan untuk pembayaran.&lt;/p&gt;';
+            
+    } catch (error) {
+        document.getElementById('payment-status').innerHTML = 
+            `&lt;p style="color: red;"&gt;Error: ${error.message}&lt;/p&gt;`;
+    }
+};
+
+const checkPayment = async () => {
+    try {
+        document.getElementById('payment-status').innerHTML = 'Checking payment status...';
+        
+        const result = await qrisPayment.checkPaymentStatus();
+        
+        if(result.status === 'success' && result.data.qris_status === 'paid') {
+            document.getElementById('payment-status').innerHTML = `
+                &lt;div style="color: green; text-align: center;"&gt;
+                    &lt;h3&gt;✅ Pembayaran Berhasil!&lt;/h3&gt;
+                    &lt;p&gt;Customer: ${result.data.qris_payment_customername}&lt;/p&gt;
+                    &lt;p&gt;Metode: ${result.data.qris_payment_methodby}&lt;/p&gt;
+                &lt;/div&gt;
+            `;
+        } else {
+            document.getElementById('payment-status').innerHTML = 
+                '&lt;p style="color: orange;"&gt;Pembayaran belum diterima. Silakan coba lagi.&lt;/p&gt;';
+        }
+        
+    } catch (error) {
+        document.getElementById('payment-status').innerHTML = 
+            `&lt;p style="color: red;"&gt;Error checking payment: ${error.message}&lt;/p&gt;`;
+    }
+};
+                </div>
+            </div>
+        </section>
+</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Dapatkan APIKEY</h3>
+                    <p>Terima APIKEY melalui email untuk mulai mengintegrasikan API ke sistem Anda</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Siap Mengintegrasikan QRIS API?</h2>
+            <p>Mulai transformasi digital bisnis Anda dengan QRIS Open API Platform. Hubungi tim kami untuk konsultasi dan panduan teknis integrasi.</p>
+            <p>Kirimkan Pesan ke InteractiveQris@gmail.com untuk mendapatkan APIKEY dan bantuan lebih.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="tentang-kami">
+            <h2>Tentang Kami</h2>
+            <p>
+                InterActive QRIS adalah bentuk dukungan InterActive Technologies Corp untuk mendukung program QRIS Bank Indonesia dalam menggalakkan cashless society (pembayaran uang digital) & membantu proses digitalisasi bisnis UKM di seluruh Indonesia.
+            </p>
+        </div>
+        <div class="menu">
+            <h2>Menu</h2>
+            <a href="#">Pusat Layanan QRIS</a>
+            <a href="#">Biaya Transaksi</a>
+            <a href="#">Harga Pembuatan QRIS</a>
+            <a href="#">Testimoni</a>
+            <a href="#">Tentang</a>
+            <a href="#">FAQ</a>
+            <a href="#">Cara Cek Dana Masuk</a>
+            <a href="#">Info</a>
+        </div>
+        <div class="buka-api">
+            <h2>Buka API QRIS</h2>
+            <a href="#">Tentang</a>
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Langkah-langkah</a>
+            <a href="#">Dokumentasi API</a>
+        </div>
+        <div class="kontak-sosmed">
+            <h2>Kontak</h2>
+            <p><i class="fas fa-phone" style="margin-right: 8px; color: var(--primary-color);"></i>(+62) 898 2323 237</p>
+            <p><i class="fas fa-envelope" style="margin-right: 8px; color: var(--primary-color);"></i>qrisinteractive@gmail.com</p>
+            <!-- <div style="margin-top: 1rem;">
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="/Javascript/API/api.js"></script>
+</body>
+</html>

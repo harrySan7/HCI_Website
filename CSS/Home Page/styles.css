@@ -1,0 +1,24 @@
+:root {
+    --primary-color: rgb(144, 31, 31);
+    --light-color : #f0f0f0;
+    --dark-color: #333;
+    --text-color: #333;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family : var(--font-family)
+}
+
+body {
+    background: 
+        linear-gradient(
+            rgba(144, 31, 31, 0.6), 
+            rgba(144, 31, 31, 0.6)
+        ),
+        url('/Images/Home Page/background.jpg') center/cover no-repeat;
+        height : 100%;
+}
