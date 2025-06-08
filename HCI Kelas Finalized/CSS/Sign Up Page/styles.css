@@ -1,0 +1,21 @@
+:root {
+    --primary-color: rgb(144, 31, 31);
+    --light-color : #f0f0f0;
+    --white : #fff;
+    --dark-color: #333;
+    --text-color: #333;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family : var(--font-family)
+}
+
+body {
+    background:
+        url('/Images/Sign Up Page/background.png') center/cover no-repeat;
+    height: 100vh;
+}

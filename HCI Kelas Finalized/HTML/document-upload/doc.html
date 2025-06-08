@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Upload Dokumen - InterActive QRIS</title>
+    <link rel="stylesheet" href="/CSS/Document Upload Page/document.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <a href="/HTML/Home Page/index.html">
+                <img src="/Images/Home Page/logo.png" alt="InterActive QRIS Logo">
+            </a>
+        </div>
+
+        <div class="header-dir">
+            <a href="/HTML/Home Page/index.html">BERANDA</a>
+            <a href="#">TENTANG QRIS</a>
+            <a href="/HTML/API/API.html">OPEN API QRIS</a>
+            <a href="#">LAINNYA</a>
+            <div class="lang">
+                <img src="/Images/Home Page/indo.png" alt="Indonesian Flag">
+                <a href="/HTML/document-upload/doc-eng.html">ID</a>
+            </div>
+            <div id="userNameDisplay"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="upload-wrapper">
+            <div class="illustration-section">
+                <div class="upload-illustration">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Unggah Dokumen</h3>
+                </div>
+                <div class="illustration-text">
+                    <h2>Verifikasi Dokumen QRIS</h2>
+                    <p>Unggah dokumen yang diperlukan untuk proses verifikasi dan aktivasi akun QRIS Anda</p>
+                </div>
+            </div>
+            
+            <div class="form-container">
+                <div class="form-background">
+                    <div class="form-header">
+                        <h3>Unggah Dokumen</h3>
+                        <p>Lengkapi dokumen verifikasi Anda</p>
+                    </div>
+                    
+                    <form id="documentUpload">
+                        <!-- KTP Upload -->
+                        <div class="upload-section">
+                            <h4><i class="fas fa-id-card"></i> Kartu Tanda Penduduk (KTP)</h4>
+                            <div class="upload-area" data-upload="ktp">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Klik atau drag file KTP di sini</p>
+                                <span class="file-types">Format: JPG, PNG, PDF (Max: 5MB)</span>
+                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png,.pdf" data-type="ktp">
+                            </div>
+                            <div class="uploaded-files" id="ktp-files"></div>
+                        </div>
+
+                        <!-- Business License Upload -->
+                        <div class="upload-section">
+                            <h4><i class="fas fa-certificate"></i> Surat Izin Usaha (SIUP/NIB)</h4>
+                            <div class="upload-area" data-upload="business">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Klik atau drag file SIUP/NIB di sini</p>
+                                <span class="file-types">Format: JPG, PNG, PDF (Max: 5MB)</span>
+                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png,.pdf" data-type="business">
+                            </div>
+                            <div class="uploaded-files" id="business-files"></div>
+                        </div>
+
+                        <!-- Bank Statement Upload -->
+                        <div class="upload-section">
+                            <h4><i class="fas fa-university"></i> Rekening Koran / Mutasi Bank</h4>
+                            <div class="upload-area" data-upload="bank">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Klik atau drag file rekening koran di sini</p>
+                                <span class="file-types">Format: JPG, PNG, PDF (Max: 10MB)</span>
+                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png,.pdf" data-type="bank">
+                            </div>
+                            <div class="uploaded-files" id="bank-files"></div>
+                        </div>
+
+                        <!-- Store Photo Upload -->
+                        <div class="upload-section">
+                            <h4><i class="fas fa-store"></i> Foto Toko / Tempat Usaha</h4>
+                            <div class="upload-area" data-upload="store">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Klik atau drag foto toko di sini</p>
+                                <span class="file-types">Format: JPG, PNG (Max: 5MB)</span>
+                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png" data-type="store" multiple>
+                            </div>
+                            <div class="uploaded-files" id="store-files"></div>
+                        </div>
+
+                        <button type="submit" class="submit-button" id="submitBtn" disabled>
+                            <i class="fas fa-upload" style="margin-right: 8px;"></i>
+                            KIRIM DOKUMEN
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="tentang-kami">
+            <h2>Tentang Kami</h2>
+            <p>
+                InterActive QRIS adalah bentuk dukungan InterActive Technologies Corp untuk mendukung program QRIS Bank Indonesia dalam menggalakkan cashless society (pembayaran uang digital) & membantu proses digitalisasi bisnis UKM di seluruh Indonesia.
+            </p>
+        </div>
+        <div class="menu">
+            <h2>Menu</h2>
+            <a href="#">Pusat Layanan QRIS</a>
+            <a href="#">Biaya Transaksi</a>
+            <a href="#">Harga Pembuatan QRIS</a>
+            <a href="#">Testimoni</a>
+            <a href="#">Tentang</a>
+            <a href="#">FAQ</a>
+            <a href="#">Cara Cek Dana Masuk</a>
+            <a href="#">Info</a>
+        </div>
+        <div class="buka-api">
+            <h2>Buka API QRIS</h2>
+            <a href="#">Tentang</a>
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Langkah-langkah</a>
+            <a href="/HTML/API/API.html">Dokumentasi API</a>
+        </div>
+        <div class="kontak-sosmed">
+            <h2>Kontak</h2>
+            <p><i class="fas fa-phone" style="margin-right: 8px; color: var(--primary-color);"></i>(+62) 898 2323 237</p>
+            <p><i class="fas fa-envelope" style="margin-right: 8px; color: var(--primary-color);"></i>qrisinteractive@gmail.com</p>
+            <!-- <div style="margin-top: 1rem;">
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: var(--primary-color); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="/Javascript/Document Upload Page/document.js"></script>
+</body>
+</html>
